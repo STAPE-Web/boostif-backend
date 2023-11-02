@@ -28,7 +28,7 @@ class AuthController {
 
     async google(req, res) {
         try {
-            const redirectUrl = 'http://localhost:5000/api/oauth'
+            const redirectUrl = `${SERVER_URL}/api/oauth`
             const oAuth2Client = new OAuth2Client(
                 process.env.CLIENT_ID,
                 process.env.CLIENT_SECRET,
@@ -50,7 +50,7 @@ class AuthController {
     async oauth(req, res) {
         try {
             const code = req.query.code
-            const redirectUrl = 'http://localhost:5000/api/oauth'
+            const redirectUrl = `${process.env.SERVER_URL}/api/oauth`
             const oAuth2Client = new OAuth2Client(
                 process.env.CLIENT_ID,
                 process.env.CLIENT_SECRET,
@@ -74,7 +74,7 @@ class AuthController {
                 })
             }
 
-            res.redirect(`http://localhost:5173/?uid=${data.sub}`)
+            res.redirect(`${process.env.CLIENT_URL}/?uid=${data.sub}`)
         } catch (e) {
             console.log(e);
         }
