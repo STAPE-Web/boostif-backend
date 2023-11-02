@@ -28,7 +28,7 @@ class AuthController {
 
     async google(req, res) {
         try {
-            const redirectUrl = `${SERVER_URL}/api/oauth`
+            const redirectUrl = `${process.env.SERVER_URL}/api/oauth`
             const oAuth2Client = new OAuth2Client(
                 process.env.CLIENT_ID,
                 process.env.CLIENT_SECRET,
