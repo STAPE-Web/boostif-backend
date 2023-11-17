@@ -51,6 +51,7 @@ class AuthController {
         try {
             const code = req.query.code
             const redirectUrl = `${process.env.SERVER_URL}/api/oauth`
+            console.log(redirectUrl)
             const oAuth2Client = new OAuth2Client(
                 process.env.CLIENT_ID,
                 process.env.CLIENT_SECRET,
