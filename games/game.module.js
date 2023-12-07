@@ -10,10 +10,10 @@ class GameModule {
         }
     }
 
-    async get(type) {
+    async get() {
         let data = []
-        const ref = db.collection('games').where("type", "==", type)
-        const snapshot = await ref.orderBy("timestamp", "desc").get();
+        const ref = db.collection('games')
+        const snapshot = await ref.get();
         if (snapshot.empty) {
             console.log('No matching documents.');
             return;
@@ -28,22 +28,10 @@ class GameModule {
         return data
     }
 
-    async create(title, price, type) {
-        const ref = db.collection('games')
-        await ref.add({ title, price, timestamp, type })
-        return true
-    }
-
-    async delete(id) {
-        const ref = db.collection('games').doc(id)
-        await ref.delete()
-        return true
-    }
-
-    async update(id, title, price) {
+    async update(id, name, text) {
         const ref = db.collection('games').doc(id)
         await ref.update({
-            title, price
+            name, text
         })
         return true
     }
