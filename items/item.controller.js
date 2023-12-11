@@ -25,8 +25,9 @@ class ItemController {
 
     async update(req, res) {
         try {
-            const { id, name, text } = req.body
-            const data = await ItemModule.update(id, name, text)
+            const { id, name, description, price, image } = req.body
+            console.log(id, name, description, price, image)
+            const data = await ItemModule.update(id, name, description, price, image)
 
             res.send(data)
         } catch (e) {

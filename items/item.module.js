@@ -28,10 +28,10 @@ class ItemModule {
         return data
     }
 
-    async update(id, name, text) {
+    async update(id, name, description, price, image) {
         const ref = db.collection('items').doc(id)
         await ref.update({
-            name, text
+            name, price, image, description
         })
         return true
     }
