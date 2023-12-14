@@ -16,6 +16,10 @@ class AuthService {
     async google(req, res) {
         await AuthController.google(req, res)
     }
+
+    async admin(req, res) {
+        await AuthController.admin(req, res)
+    }
 }
 
 module.exports = new AuthService();

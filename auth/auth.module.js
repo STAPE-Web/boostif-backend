@@ -39,6 +39,12 @@ class AuthModule {
         return message;
     }
 
+    async admin(login, password) {
+        // wh2G$5343/d=
+        const adminData = await db.collection("admin").doc("admin").get()
+        return adminData.data().login === login && adminData.data().password === password
+    }
+
     async register(email, password, username) {
         const docId = uuid.v4()
         const salt = await bcrypt.genSalt(10)

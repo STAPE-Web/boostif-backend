@@ -15,6 +15,17 @@ class AuthController {
         }
     }
 
+    async admin(req, res) {
+        try {
+            const { login, password } = await req.body;
+            const data = await AuthModule.admin(login, password)
+
+            res.send(data)
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     async register(req, res) {
         try {
             const { email, password, username } = await req.body;
