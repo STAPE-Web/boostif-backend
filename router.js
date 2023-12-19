@@ -5,6 +5,7 @@ const chatService = require("./chat/chat.service.js")
 const Payment = require("./payment/service.js")
 const gameService = require("./games/game.service.js")
 const itemService = require("./items/item.service.js")
+const pageService = require("./pages/page.service.js")
 
 const router = new Router()
 
@@ -34,5 +35,8 @@ router.get('/items/get', itemService.getOne)
 router.post('/items/create', itemService.create)
 router.delete('/items/delete', itemService.delete)
 router.put('/items/update', itemService.update)
+
+router.get('/pages/get', pageService.getOne)
+router.put('/pages/update', pageService.update)
 
 module.exports = router
