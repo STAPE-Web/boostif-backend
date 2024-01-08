@@ -11,12 +11,23 @@ class GameController {
         }
     }
 
-    async update(req, res) {
+    async getOne(req, res) {
         try {
-            const { id, name, text } = req.body
-            const data = await GameModule.update(id, name, text)
+            const { id } = req.query
+            const data = await GameModule.getById(id)
 
             res.send(data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async update(req, res) {
+        try {
+            const { id, data } = req.body
+            const response = await GameModule.update(id, data)
+
+            res.json(response)
         } catch (e) {
             console.log(e)
         }

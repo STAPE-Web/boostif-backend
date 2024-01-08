@@ -28,10 +28,10 @@ class GameModule {
         return data
     }
 
-    async update(id, name, text) {
+    async update(id, data) {
         const ref = db.collection('games').doc(id)
         await ref.update({
-            name, text
+            ...data
         })
         return true
     }
