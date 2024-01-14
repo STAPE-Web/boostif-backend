@@ -1,20 +1,36 @@
-const axios = require('axios');
+const dotenv = require('dotenv');
+dotenv.config()
 
-const clientId = '228792432';
-const clientSecret = 'YOUR_CLIENT_SECRET';
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 
-class Payment {
-    async getAccessToken() {
-        const response = await axios.post('https://api.skrill.com/v1/oauth2/token', {
-            client_id: clientId,
-            client_secret: clientSecret,
-            grant_type: 'client_credentials',
-        });
+class PayController {
+    async pay(req, res) {
+        try {
+            const { price } = req.body
+            const params = `?price=${price / 100}`
 
-        const { access_token } = response.data;
-        console.log(access_token)
-        // return access_token;
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                mode: 'payment',
+                success_url: `${process.env.CLIENT_URL}/success${params}`,
+                cancel_url: `${process.env.CLIENT_URL}/`,
+                line_items: [{
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: `100 items`,
+                        },
+                        unit_amount: price,
+                    },
+                    quantity: 1,
+                }],
+            });
+
+            res.send({ session: session });
+        } catch (e) {
+            res.send(e)
+        }
     }
 }
 
-module.exports = new Payment()
+module.exports = new PayController()

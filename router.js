@@ -22,7 +22,7 @@ router.post('/user/update', userService.update)
 router.get('/chat/get', chatService.get)
 router.post('/chat/message', chatService.message)
 
-router.post('/payment', Payment.getAccessToken)
+router.post('/payment', Payment.pay)
 
 router.get('/games', gameService.get)
 router.get('/games/get', gameService.getOne)
