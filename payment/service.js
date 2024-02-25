@@ -7,18 +7,17 @@ class PayController {
     async pay(req, res) {
         try {
             const { price } = req.body
-            const params = `?price=${price / 100}`
 
             const session = await stripe.checkout.sessions.create({
                 payment_method_types: ['card'],
                 mode: 'payment',
-                success_url: `${process.env.CLIENT_URL}/success${params}`,
+                success_url: `${process.env.CLIENT_URL}/success`,
                 cancel_url: `${process.env.CLIENT_URL}/`,
                 line_items: [{
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: `100 items`,
+                            name: `Boost Game`,
                         },
                         unit_amount: price,
                     },
