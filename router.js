@@ -6,7 +6,7 @@ const Payment = require("./payment/service.js")
 const gameService = require("./games/game.service.js")
 const itemService = require("./items/item.service.js")
 const pageService = require("./pages/page.service.js")
-const CreateOrder = require("./order/controller.js")
+const { CreateOrder, GetOrder } = require("./order/controller.js")
 
 const router = new Router()
 
@@ -41,5 +41,6 @@ router.get('/pages/get', pageService.getOne)
 router.put('/pages/update', pageService.update)
 
 router.post('/createOrder', CreateOrder)
+router.get('/getOrder', GetOrder)
 
 module.exports = router
